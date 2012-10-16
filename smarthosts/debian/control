@@ -10,7 +10,7 @@ XSBC-Bugtracker: mailto:lovewilliam@gmail.com
 
 Package: smarthosts
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}
+Depends: ${shlibs:Depends}, ${misc:Depends}, developer-mode
 Description: SmartHosts can update your hosts file
  For more info please read
  http://code.google.com/p/smarthosts/

@@ -101,6 +101,7 @@ QString UtilEngine::getHostsDate()
 void UtilEngine::slot_updateSavedHostFile()
 {
 	//Download hosts file and store in SAVED_HOSTS_FILE
+	slot_downloadProgress(0,100);
 	QNetworkReply* reply = networkManager->get(QNetworkRequest(QUrl(HOSTS_URL)));
 	connect(reply,SIGNAL(downloadProgress(qint64,qint64)),
 		this,SLOT(slot_downloadProgress(qint64,qint64)));
@@ -195,11 +196,11 @@ void UtilEngine::slot_replyFinished(QNetworkReply* reply)
 			out<<reply->readAll();
 			out.flush();
 			file.close();
-			emit signal_updateHosts_done();
 			lastUpdate = QDateTime::currentDateTime();
 			settings->setValue("lastUpdate",lastUpdate);
 			settings->sync();
 			slot_parseHostsFile(SAVED_HOSTS_FILE);
+			emit signal_updateHosts_done();
 		}else
 		{
 			emit signal_error(FILESYS,"Can not open temp file!");
