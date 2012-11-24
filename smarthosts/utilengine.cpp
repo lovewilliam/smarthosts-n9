@@ -101,7 +101,6 @@ QString UtilEngine::getHostsDate()
 void UtilEngine::slot_updateSavedHostFile()
 {
 	//Download hosts file and store in SAVED_HOSTS_FILE
-<<<<<<< HEAD
 	QUrl targetUrl;
 	if(settings->value("hosts_url","PC").toString()=="PC")
 	{
@@ -118,11 +117,7 @@ void UtilEngine::slot_updateSavedHostFile()
 	}
 
 	slot_downloadProgress(0,100);
-	QNetworkReply* reply = networkManager->get(QNetworkRequest(targetUrl));
-=======
-	slot_downloadProgress(0,100);
 	QNetworkReply* reply = networkManager->get(QNetworkRequest(QUrl(HOSTS_URL)));
->>>>>>> 03366ace53f12cffeb88e3b4080b5ea8d5b98da1
 	connect(reply,SIGNAL(downloadProgress(qint64,qint64)),
 		this,SLOT(slot_downloadProgress(qint64,qint64)));
 }
