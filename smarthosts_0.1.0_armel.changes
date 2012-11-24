@@ -1,0 +1,25 @@
+Format: 1.8
+Date: Wed, 10 Oct 2012 00:26:50 +0800
+Source: smarthosts
+Binary: smarthosts
+Architecture: source armel
+Version: 0.1.0
+Distribution: unstable
+Urgency: low
+Maintainer: lovewilliam <lovewilliam@gmail.com>
+Changed-By: lovewilliam <lovewilliam@gmail.com>
+Description: 
+ smarthosts - SmartHosts can update your hosts file
+Changes: 
+ smarthosts (0.1.0) unstable; urgency=low
+ .
+   * Initial Release.
+Checksums-Sha1: 
+ 628dc4234fc4ab9d7dd6aaeb420fe315630ce24b 485 smarthosts_0.1.0.dsc
+ 8ed7cf9d037d1a5b22bbaec905fce2b198bf50e0 122941 smarthosts_0.1.0.tar.gz
+ 370b877921d8c40af0c306292042d2bf64c3c6f1 41528 smarthosts_0.1.0_armel.deb
+Files: 
+ 067e425b4c68af67342b0c0546dbb20f 485 user/Other optional smarthosts_0.1.0.dsc
+ 18d85582efd155aa297eea0f951b0561 122941 user/Other optional smarthosts_0.1.0.tar.gz
+ 2401613d56f09c65347a4b8adfe5fbbe 41528 user/Other optional smarthosts_0.1.0_armel.deb
+Bugtracker: mailto:lovewilliam@gmail.com

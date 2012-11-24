@@ -22,6 +22,8 @@
 #include "dataobject.h"
 
 #define HOSTS_URL "https://smarthosts.googlecode.com/svn/trunk/hosts"
+#define HOSTS_ANDROID "https://smarthosts.googlecode.com/svn/trunk/mobile_devices/hosts"
+#define HOSTS_IOS "https://smarthosts.googlecode.com/svn/trunk/mobile_devices/iOS/hosts"
 
 //#define SAVED_HOSTS_FILE "/home/user/.config/bss/hosts"
 #define SAVED_HOSTS_FILE "/root/hosts"
@@ -44,7 +46,9 @@ class UtilEngine : public QObject
 		QVector<QStringList*>* getItems();
 		QString getLastUpdateTime();
 		QString getHostsDate();
+		QString getHostsFileType();
 		bool isRoot();
+		void setHostsFileType(QVariant);
 		void slot_updateSavedHostFile();
 		void slot_writeCleanHosts();
 		void slot_writeHosts();

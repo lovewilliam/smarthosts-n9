@@ -101,7 +101,23 @@ QString UtilEngine::getHostsDate()
 void UtilEngine::slot_updateSavedHostFile()
 {
 	//Download hosts file and store in SAVED_HOSTS_FILE
-	QNetworkReply* reply = networkManager->get(QNetworkRequest(QUrl(HOSTS_URL)));
+	QUrl targetUrl;
+	if(settings->value("hosts_url","PC").toString()=="PC")
+	{
+		targetUrl = HOSTS_URL;
+	}else if(settings->value("hosts_url").toString()=="ANDROID")
+	{
+		targetUrl = HOSTS_ANDROID;
+	}else if(settings->value("hosts_url").toString()=="IOS")
+	{
+		targetUrl = HOSTS_IOS;
+	}else
+	{
+		targetUrl = settings->value("hosts_url").toString();
+	}
+
+	slot_downloadProgress(0,100);
+	QNetworkReply* reply = networkManager->get(QNetworkRequest(targetUrl));
 	connect(reply,SIGNAL(downloadProgress(qint64,qint64)),
 		this,SLOT(slot_downloadProgress(qint64,qint64)));
 }
@@ -195,11 +211,11 @@ void UtilEngine::slot_replyFinished(QNetworkReply* reply)
 			out<<reply->readAll();
 			out.flush();
 			file.close();
-			emit signal_updateHosts_done();
 			lastUpdate = QDateTime::currentDateTime();
 			settings->setValue("lastUpdate",lastUpdate);
 			settings->sync();
 			slot_parseHostsFile(SAVED_HOSTS_FILE);
+			emit signal_updateHosts_done();
 		}else
 		{
 			emit signal_error(FILESYS,"Can not open temp file!");
@@ -293,5 +309,16 @@ void UtilEngine::slot_tickChanged(QString _label,bool isTicked)
 void UtilEngine::slot_downloadProgress(qint64 bytesReceived,qint64 bytesTotal)
 {
 	emit signal_downloadProgress(bytesReceived,bytesTotal);
+}
+
+QString UtilEngine::getHostsFileType()
+{
+	return settings->value("hosts_url").toString();
+}
+
+void UtilEngine::setHostsFileType(QVariant data)
+{
+	settings->setValue("hosts_url",data);
+	settings->sync();
 }
 
